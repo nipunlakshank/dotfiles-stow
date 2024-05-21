@@ -17,7 +17,7 @@ git clone --recurse-submodules -j8 git@github.com:nipunlakshank/dotfiles.git
 ```
 
 ```bash
-cd dotfiles && git submodule update --init --recursive --remote -j8
+cd dotfiles && git submodule update --init --recursive --remote
 ```
 
 * git version 2.12.0 or earlier:
