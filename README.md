@@ -7,7 +7,7 @@
 * git version 2.13.0 or later:
 
 ```bash
-git clone --recursive-submodules -j8 git@github.com:nipunlakshank/dotfiles.git
+git clone --recurse-submodules -j8 git@github.com:nipunlakshank/dotfiles.git
 ```
 
 * git version 2.12.0 or earlier:
