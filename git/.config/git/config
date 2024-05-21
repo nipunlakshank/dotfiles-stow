@@ -8,7 +8,7 @@
 	defaultBranch = main
 
 [core]
-    editor = vim
+    editor = nvim
     pager = less -F -X
 
 [color]
@@ -23,7 +23,7 @@
     pager = true
 
 [commit]
-	gpgsign = true
+    gpgSign = true
 
 [merge]
     tool = vimdiff
