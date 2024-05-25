@@ -35,8 +35,9 @@ function reload() {
 	print "\33[3m\33[93mReloading shell configuration...\33[0m"
 	source "$ZDOTDIR/.zprofile"
 	source "$ZDOTDIR/.zshrc"
+    source "$ZDOTDIR/custom/aliasconfig.zsh"
 	end=$(date +%s)
-	print "\33[92mDone. Execution time: $(("$end" - "$start")) seconds.\33[0m"
+    print "\33[92mDone. (took $(("$end" - "$start")) seconds)\33[0m"
 }
 
 function scan() {
