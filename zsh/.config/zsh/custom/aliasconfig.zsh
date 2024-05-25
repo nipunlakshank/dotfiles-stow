@@ -31,6 +31,8 @@ alias vhosts="${EDITOR} /opt/homebrew/etc/httpd/extra/httpd-vhosts.conf"
 alias hosts="${EDITOR} /etc/hosts"
 alias tmuxconf="${EDITOR} ${XDG_CONFIG_HOME}/tmux/tmux.conf"
 alias myclirc="${EDITOR} ${XDG_CONFIG_HOME}/mycli/myclirc"
+alias gitconfig='${EDITOR} ${XDG_CONFIG_HOME}/git/config'
+alias kittyconfig='${EDITOR} ~/.config/kitty/kitty.conf'
 
 # Database shortcuts
 alias db='mysql --version'
