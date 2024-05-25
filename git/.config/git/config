@@ -32,13 +32,13 @@
     backup = false
 
 [mergetool "vimdiff"]
-    cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+    cmd = nvim -f -c "Gvdiffsplit! \"$MERGED\""
 
 [diff]
     tool = vimdiff
 
 [difftool "vimdiff"]
-    cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+    cmd = nvim -f -c "Gvdiffsplit! \"$MERGED\""
 
 [format]
     # pretty = %C(auto)%h %s %C(green)(%an, %ar)%C(reset)
