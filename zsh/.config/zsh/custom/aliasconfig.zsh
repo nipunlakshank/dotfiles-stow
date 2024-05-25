@@ -74,6 +74,7 @@ alias nvf='nvim $(fd | fzf --prompt=" Select file or directory  " --height
 alias nvsf='nvs $(fd | fzf --prompt=" Select file or directory  " --height=~80% --layout=reverse --border --exit-0)'
 alias path='line_format ${PATH} :'
 alias oil='nvim -c "Oil"'
+alias antix="ssh_connect --user nipun --file ${XDG_CONFIG_HOME}/ssh_connect/servers/antix.txt"
 
 alias config="cd ${XDG_CONFIG_HOME} && lsa"
 alias cache="cd ${XDG_CACHE_HOME} && lsa"
@@ -81,7 +82,8 @@ alias state="cd ${XDG_STATE_HOME} && lsa"
 alias data="cd ${XDG_DATA_HOME} && lsa"
 alias bin="cd ${XDG_BIN_HOME} && lsa"
 
-alias antix="ssh_connect --user nipun --file ${XDG_CONFIG_HOME}/ssh_connect/servers/antix.txt"
-alias nvrtp='nvim -c "set rtp+=./"'
 alias ta='tmux attach'
 alias tn='tmux'
+
+alias nvrtp='nvim -c "set rtp+=./"'
+alias nvg='nvim -c "Git" -c "only"'
