@@ -139,7 +139,8 @@ eval "$(zoxide init zsh)"
 
 # Welcome message (keep this at bottom)
 function welcome() {
-	cowsay "$(fortune -s)" | lolcat
+    # cowsay "$(fortune -s)" | lolcat
+    neofetch | lolcat
 }
 
 welcome
