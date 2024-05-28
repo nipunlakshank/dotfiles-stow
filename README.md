@@ -1,4 +1,4 @@
-<h1 style="text-align: center;">My dotfiles repo</h1>
+<h1 align="center">My dotfiles repo</h1>
 
 ## Dependencies
 
