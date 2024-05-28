@@ -1,8 +1,13 @@
-# dotfiles
+<h1 style="text-align: center;">My dotfiles repo</h1>
+
+## Dependencies
+
+* git
+* [Gnu Stow](https://www.gnu.org/software/stow/)
 
 ## Setup
 
-#### 1. Clone the repository
+### 1. Clone the repository
 
 * git version 2.23.0 or later:
 
@@ -24,4 +29,18 @@ cd dotfiles && git submodule update --init --recursive --remote
 
 ```bash
 git clone --recursive -j8 git@github.com:nipunlakshank/dotfiles.git
+```
+
+### 2. Stow configs
+
+* Stow all configs
+
+```bash
+stow -vSt ~ *
+```
+
+* Stow specific configs
+
+```bash
+stow -vSt ~ vim zsh starship
 ```
