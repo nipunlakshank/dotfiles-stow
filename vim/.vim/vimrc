@@ -15,6 +15,7 @@ let g:maplocalleader=' '
 filetype plugin indent on
 syntax on
 " set timeoutlen=250
+set updatetime=100
 set showcmd
 set directory=$HOME/.vim/swapfiles//
 set noswapfile
@@ -72,6 +73,10 @@ Plug 'tpope/vim-vinegar'
 Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'rhysd/committia.vim'
+
+Plug 'mityu/vim-applescript'
 
 " Lsp
 Plug 'prabirshrestha/vim-lsp'
@@ -87,8 +92,33 @@ Plug 'thomasfaingnaert/vim-lsp-ultisnips'
 call plug#end()
 " ----------- Plugins end ----------- "
 
+" committia.vim
+let g:committia_status_window_min_height = 80
+let g:committia_hooks = {}
+function! g:committia_hooks.edit_open(info)
+    " Additional settings
+    setlocal spell
 
-" let g:colorscheme="catppuccin_mocha"
+    " If no commit message, start with insert mode
+    if a:info.vcs ==# 'git' && getline(1) ==# ''
+        startinsert
+    endif
+
+    " Scroll the diff window from insert mode
+    " Map <C-n> and <C-p>
+    imap <buffer><C-d> <Plug>(committia-scroll-diff-down-half)
+    imap <buffer><C-u> <Plug>(committia-scroll-diff-up-half)
+endfunction
+
+function! GitGutterNextHunkCycle()
+  let line = line('.')
+  silent! GitGutterNextHunk
+  if line('.') == line
+    1
+    GitGutterNextHunk
+  endif
+endfunction
+
 let g:colorscheme="catppuccin_mocha"
 
 let g:airline_theme='transparent'
@@ -213,7 +243,6 @@ nnoremap <leader>fh :Helptags<CR>
 " ----------- Auto commands start ----------- "
 autocmd VimEnter * execute "colorscheme " . g:colorscheme
 autocmd VimEnter * hi Normal ctermbg=NONE guibg=NONE
-autocmd VimEnter * hi EndOfBuffer ctermfg=7 guifg=lightgray ctermbg=NONE guibg=NONE
 autocmd VimEnter * hi NonText ctermbg=NONE guibg=NONE
 
 autocmd SourcePost * execute "colorscheme " . g:colorscheme
