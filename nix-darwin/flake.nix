@@ -6,7 +6,7 @@
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    # nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
 
     # Optional: Declarative tap management
     # homebrew-core = {
@@ -35,30 +35,34 @@
 
           # List packages installed in system profile. To search by name, run:
           # $ nix-env -qaP | grep wget
-          environment.systemPackages = [
-            pkgs.pam-reattach
-            pkgs.alacritty
-            pkgs.mycli
-            pkgs.mkalias
-            pkgs.vim
-            pkgs.nil
-            pkgs.nixfmt-rfc-style
+          environment.systemPackages = with pkgs; [
+            stow
+            pam-reattach
+            # mycli
+            mkalias
+            vim
+            neovim
+            nil
+            nixfmt-rfc-style
           ];
 
           homebrew = {
             enable = true;
 
             casks = [
-              "tailscale"
-              "keka"
+              "kitty"
+              # "google-chrome"
+              # "tailscale"
+              # "keka"
             ];
 
             brews = [
               "mas"
+              "imagemagick"
             ];
 
             masApps = {
-              "Pages" = 409201541;
+              # "Pages" = 409201541;
             };
 
             # onActivation.cleanup = "zap";
@@ -119,7 +123,7 @@
           # The platform the configuration will be used on.
           nixpkgs.hostPlatform = "aarch64-darwin";
 
-          security.pam.enableSudoTouchIdAuth = true; # this will make changes to /etc/pam.d/sudo which gets reset on system updates
+          # security.pam.enableSudoTouchIdAuth = true; # this will make changes to /etc/pam.d/sudo which gets reset on system updates
 
           # enable touchId for sudo (this will add pam_tid.so to /etc/pam.d/sudo_local which is not affected by system updates)
           environment = {
@@ -130,9 +134,55 @@
             '';
           };
 
+          # Set up system settings.
           system.defaults = {
-            dock.autohide = true;
-            finder.AppleShowAllExtensions = true;
+            dock = {
+              autohide = true;
+              show-recents = false;
+              mru-spaces = false;
+
+              # persistent-apps = [
+              #   "/Applications/Launchpad.app"
+              #   "/Applications/kitty.app"
+              #   "/Applications/Safari.app"
+              #   "/Applications/Mail.app"
+              #   "/Applications/Keka.app"
+              # ];
+            };
+
+            finder = {
+              AppleShowAllExtensions = true;
+              ShowPathbar = true;
+              ShowStatusBar = true;
+            };
+
+            trackpad = {
+              Clicking = true;
+              ActuationStrength = 0;
+              FirstClickThreshold = 0;
+              SecondClickThreshold = 1;
+              TrackpadRightClick = true;
+              TrackpadThreeFingerDrag = true;
+            };
+
+            WindowManager = {
+              AutoHide = true;
+              StandardHideWidgets = false;
+              StageManagerHideWidgets = true;
+              EnableStandardClickToShowDesktop = true;
+              AppWindowGroupingBehavior = true;
+            };
+
+            spaces = {
+              spans-displays = false;
+            };
+
+            ".GlobalPreferences"."com.apple.mouse.scaling" = -1.0;  # -1.0 is means no acceleration
+
+            loginwindow.GuestEnabled = false;
+
+            NSGlobalDomain.AppleICUForce24HourTime = true;
+            # NSGlobalDomain.KeyRepeat = 2;
           };
         };
     in
@@ -142,22 +192,22 @@
       darwinConfigurations."air" = nix-darwin.lib.darwinSystem {
         modules = [
           macConfiguration
-          nix-homebrew.darwinModules.nix-homebrew
-          {
-            nix-homebrew = {
-              # Install Homebrew under the default prefix
-              enable = true;
-
-              # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
-              enableRosetta = true;
-
-              # User owning the Homebrew prefix
-              user = "nipun";
-
-              # Automatically migrate existing Homebrew installations
-              autoMigrate = true;
-            };
-          }
+          # nix-homebrew.darwinModules.nix-homebrew
+          # {
+          #   nix-homebrew = {
+          #     # Install Homebrew under the default prefix
+          #     enable = true;
+          #
+          #     # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
+          #     enableRosetta = true;
+          #
+          #     # User owning the Homebrew prefix
+          #     user = "nipun";
+          #
+          #     # Automatically migrate existing Homebrew installations
+          #     autoMigrate = true;
+          #   };
+          # }
         ];
       };
 
