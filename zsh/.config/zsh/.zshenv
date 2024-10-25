@@ -14,17 +14,22 @@ export XDG_RUNTIME_DIR=/var/run
 # fi
 
 # General
-export EDITOR='vim'
+export HOMEBREW_NO_ANALYTICS=1
+export EDITOR='nvim'
 export LESS="-SRXF"
-export PS_FORMAT="\nID\t{{.ID}}\nNAME\t{{.Names}}\nImage\t{{.Image}}
-PORTS\t{{.Ports}}\nCOMMAND\t{{.Command}}\nCREATED\t{{.CreatedAt}}\nSTATUS\t{{.Status}}\n"
+export PS_FORMAT="\nID\t{{.ID}}\nNAME\t{{.Names}}\nImage\t{{.Image}}\nPORTS\t{{.Ports}}\nCOMMAND\t{{.Command}}\nCREATED\t{{.CreatedAt}}\nSTATUS\t{{.Status}}\n"
 
 # zsh
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 export ZCUSTOM="${ZDOTDIR}/custom"
+export HISTFILE="${ZDOTDIR}/.zsh_history"
+export HISTSIZE=100000
+export SAVEHIST=50000
+
+# nix
+export NIX_CONF_DIR=${XDG_CONFIG_HOME}/nix
 
 # Other programs
-export HISTFILE=$XDG_STATE_HOME/bash/history
 export LESSHISTFILE=$XDG_STATE_HOME/less/history
 export MYCLI_HISTFILE=$XDG_DATA_HOME/mycli/history
 export JAVA_HOME=$(/usr/libexec/java_home -v 17)
@@ -37,6 +42,7 @@ export _Z_DATA="$XDG_DATA_HOME/z"
 export NVM_DIR="$XDG_DATA_HOME/nvm"
 export GNUPGHOME=${XDG_DATA_HOME}/gnupg
 export GPG_TTY="$(tty)"
+export LG_CONFIG_FILE="${XDG_CONFIG_HOME}/lazygit/config.yml,${XDG_CONFIG_HOME}/lazygit/themes-mergable/mocha/peach.yml"
 # export DYLD_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_LIBRARY_PATH"
 
 export ANDROID_HOME=$XDG_DATA_HOME/android
@@ -62,4 +68,3 @@ PATH=$PATH:"/Users/nipun/Library/Application Support/Herd/bin"
 export PATH="$PATH:/Users/nipun/Library/Application Support/JetBrains/Toolbox/scripts"
 
 export PATH
-
