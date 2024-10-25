@@ -2,7 +2,7 @@
 # For a full list of active aliases, run `alias`.
 
 alias sudo='sudo ' # to use sudo with aliases
-# alias cd='z'
+alias cd='z'
 
 # colorls map
 alias ls='colorls'
