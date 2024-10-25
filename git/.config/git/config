@@ -8,7 +8,7 @@
 	defaultBranch = main
 
 [core]
-    editor = nvim
+    editor = vim
     pager = less -F -X
 
 [color]
