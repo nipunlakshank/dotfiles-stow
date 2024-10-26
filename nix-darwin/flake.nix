@@ -5,27 +5,13 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-
-    # nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
-
-    # Optional: Declarative tap management
-    # homebrew-core = {
-    #   url = "github:homebrew/homebrew-core";
-    #   flake = false;
-    # };
-    # homebrew-cask = {
-    #   url = "github:homebrew/homebrew-cask";
-    #   flake = false;
-    # };
-
-  };
+};
 
   outputs =
     inputs@{
       self,
       nix-darwin,
       nixpkgs,
-      nix-homebrew,
     }:
     let
       macConfiguration =
@@ -36,14 +22,15 @@
           # List packages installed in system profile. To search by name, run:
           # $ nix-env -qaP | grep wget
           environment.systemPackages = with pkgs; [
-            stow
+            tmux
             pam-reattach
-            # mycli
-            mkalias
-            vim
             neovim
+            vim
+            stow
+            mkalias
             nil
             nixfmt-rfc-style
+            # mycli
           ];
 
           homebrew = {
@@ -51,9 +38,10 @@
 
             casks = [
               "kitty"
-              # "google-chrome"
+              "google-chrome"
+              "keka"
+              "jetbrains-toolbox"
               # "tailscale"
-              # "keka"
             ];
 
             brews = [
@@ -132,6 +120,11 @@
               auth       optional       ${pkgs.pam-reattach}/lib/pam/pam_reattach.so ignore_ssh
               auth       sufficient     pam_tid.so
             '';
+
+            etc."zshenv.local".text = ''
+              # Set zsh config directory
+              export ZDOTDIR=$HOME/.config/zsh
+            '';
           };
 
           # Set up system settings.
@@ -177,7 +170,7 @@
               spans-displays = false;
             };
 
-            ".GlobalPreferences"."com.apple.mouse.scaling" = -1.0;  # -1.0 is means no acceleration
+            ".GlobalPreferences"."com.apple.mouse.scaling" = -1.0;  # -1.0 means no acceleration
 
             loginwindow.GuestEnabled = false;
 
@@ -192,22 +185,6 @@
       darwinConfigurations."air" = nix-darwin.lib.darwinSystem {
         modules = [
           macConfiguration
-          # nix-homebrew.darwinModules.nix-homebrew
-          # {
-          #   nix-homebrew = {
-          #     # Install Homebrew under the default prefix
-          #     enable = true;
-          #
-          #     # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
-          #     enableRosetta = true;
-          #
-          #     # User owning the Homebrew prefix
-          #     user = "nipun";
-          #
-          #     # Automatically migrate existing Homebrew installations
-          #     autoMigrate = true;
-          #   };
-          # }
         ];
       };
 
